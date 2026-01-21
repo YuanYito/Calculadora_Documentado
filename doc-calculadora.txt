@@ -1,0 +1,91 @@
+DOCUMENTACIÓN - CALCULADORA WEB
+================================
+
+DESCRIPCIÓN GENERAL
+-------------------
+Aplicación web de calculadora simple que permite realizar operaciones aritméticas básicas (suma, resta, multiplicación y división) de forma interactiva.
+
+ESTRUCTURA HTML
+---------------
+
+1. Cabecera (<head>)
+   - Define el charset UTF-8 para caracteres especiales
+   - Configura viewport para diseño responsive
+   - Incluye estilos CSS internos
+
+2. Cuerpo (<body>)
+   - Contiene un div principal con clase "calculadora"
+   - Incluye 4 campos principales:
+     * Primer número (input type="number")
+     * Segundo número (input type="number")
+     * Operación (select con 4 opciones)
+     * Resultado (input readonly)
+
+ESTILOS CSS
+-----------
+
+1. Body
+   - Utiliza Flexbox para centrar el contenido
+   - Aplica degradado de color (morado) como fondo
+   - Ocupa el 100% de la altura de viewport
+
+2. Contenedor .calculadora
+   - Fondo blanco con esquinas redondeadas
+   - Sombra para efecto de elevación
+   - Ancho fijo de 300px
+
+3. Campos de entrada
+   - Bordes con transición suave al enfocar
+   - Padding interno para mejor usabilidad
+   - Box-sizing: border-box para cálculo correcto de tamaño
+
+4. Campo resultado
+   - Fondo gris claro para diferenciarlo
+   - Texto destacado en color morado
+   - Solo lectura (no editable)
+
+JAVASCRIPT
+----------
+
+1. Variables principales
+   - numero1, numero2: referencias a inputs numéricos
+   - operacion: referencia al select
+   - resultado: referencia al campo de resultado
+
+2. Función calcular()
+   - Convierte strings a números con parseFloat()
+   - Valida que los números sean válidos (isNaN)
+   - Verifica que se haya seleccionado operación
+   - Ejecuta operación con switch-case
+   - Maneja error de división por cero
+   - Formatea resultado a 2 decimales con toFixed(2)
+
+3. Event Listeners
+   - 'input' en numero1 y numero2: detecta cambios al escribir
+   - 'change' en operacion: detecta selección de operación
+   - Todos ejecutan la función calcular() automáticamente
+
+FLUJO DE FUNCIONAMIENTO
+------------------------
+1. Usuario ingresa primer número
+2. Usuario ingresa segundo número
+3. Usuario selecciona operación del desplegable
+4. La función calcular() se ejecuta automáticamente
+5. Se validan los datos de entrada
+6. Se realiza la operación matemática
+7. El resultado se muestra en el campo de resultado
+
+VALIDACIONES IMPLEMENTADAS
+---------------------------
+- Verifica que ambos valores sean números válidos
+- Comprueba que se haya seleccionado una operación
+- Previene división por cero con mensaje de error
+- Limpia el resultado si faltan datos
+
+CARACTERÍSTICAS TÉCNICAS
+-------------------------
+- Cálculo en tiempo real (sin botón de calcular)
+- Interfaz responsive y moderna
+- Manejo de decimales con precisión de 2 dígitos
+- Código modular y fácil de mantener
+- Sin dependencias externas

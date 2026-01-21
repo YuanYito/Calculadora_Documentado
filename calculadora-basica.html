@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        /* Estilos generales del body - centrado vertical y horizontal */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Degradado de fondo */
+        }
+        
+        /* Contenedor principal de la calculadora */
+        .calculadora {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* Sombra para efecto de profundidad */
+            width: 300px;
+        }
+        
+        /* Título de la calculadora */
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+        }
+        
+        /* Contenedor de cada campo (label + input) */
+        .campo {
+            margin-bottom: 15px;
+        }
+        
+        /* Estilos para las etiquetas */
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        
+        /* Estilos comunes para inputs y select */
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box; /* Incluye padding en el ancho total */
+            transition: border-color 0.3s; /* Animación suave del borde */
+        }
+        
+        /* Efecto cuando el input/select está enfocado */
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        /* Estilos adicionales para el select */
+        select {
+            cursor: pointer;
+            background-color: white;
+        }
+        
+        /* Estilos específicos para el campo de resultado */
+        #resultado {
+            background-color: #f0f0f0;
+            font-weight: bold;
+            color: #667eea;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor principal -->
+    <div class="calculadora">
+        <h2>🧮 Calculadora</h2>
+        
+        <!-- Campo para el primer número -->
+        <div class="campo">
+            <label for="numero1">Primer número:</label>
+            <input type="number" id="numero1" placeholder="Ingresa el primer número">
+        </div>
+        
+        <!-- Campo para el segundo número -->
+        <div class="campo">
+            <label for="numero2">Segundo número:</label>
+            <input type="number" id="numero2" placeholder="Ingresa el segundo número">
+        </div>
+        
+        <!-- Desplegable para seleccionar la operación -->
+        <div class="campo">
+            <label for="operacion">Operación:</label>
+            <select id="operacion">
+                <option value="">-- Selecciona una operación --</option>
+                <option value="suma">➕ Suma</option>
+                <option value="resta">➖ Resta</option>
+                <option value="multiplicacion">✖️ Multiplicación</option>
+                <option value="division">➗ División</option>
+            </select>
+        </div>
+        
+        <!-- Campo de solo lectura para mostrar el resultado -->
+        <div class="campo">
+            <label for="resultado">Resultado:</label>
+            <input type="text" id="resultado" readonly placeholder="El resultado aparecerá aquí">
+        </div>
+    </div>
+
+    <script>
+        // Obtener referencias a los elementos del DOM
+        const numero1 = document.getElementById('numero1');
+        const numero2 = document.getElementById('numero2');
+        const operacion = document.getElementById('operacion');
+        const resultado = document.getElementById('resultado');
+
+        // Función principal que realiza el cálculo
+        function calcular() {
+            // Convertir los valores de texto a números
+            const num1 = parseFloat(numero1.value);
+            const num2 = parseFloat(numero2.value);
+            const op = operacion.value;
+
+            // Validar que ambos números sean válidos
+            if (isNaN(num1) || isNaN(num2)) {
+                resultado.value = '';
+                return;
+            }
+
+            // Verificar que se haya seleccionado una operación
+            if (op === '') {
+                resultado.value = '';
+                return;
+            }
+
+            let res;
+            // Ejecutar la operación seleccionada
+            switch(op) {
+                case 'suma':
+                    res = num1 + num2;
+                    break;
+                case 'resta':
+                    res = num1 - num2;
+                    break;
+                case 'multiplicacion':
+                    res = num1 * num2;
+                    break;
+                case 'division':
+                    // Validar división por cero
+                    if (num2 === 0) {
+                        resultado.value = 'Error: División por cero';
+                        return;
+                    }
+                    res = num1 / num2;
+                    break;
+            }
+
+            // Mostrar el resultado con máximo 2 decimales
+            resultado.value = res.toFixed(2);
+        }
+
+        // Event listeners para calcular automáticamente al cambiar cualquier valor
+        numero1.addEventListener('input', calcular);
+        numero2.addEventListener('input', calcular);
+        operacion.addEventListener('change', calcular);
+    </script>
+</body>
+</html>
