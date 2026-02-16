@@ -61,15 +61,7 @@ classDiagram
     ICalculadora <|.. Calculadora
 ```
 
-    Main ..> GestorCalculadora : instanciar
-    GestorCalculadora --> IEntrada : usa
-    GestorCalculadora --> ISalida : usa
-    GestorCalculadora --> ICalculator : usa
-    IEntrada <|.. EntradaConsola
-    ISalida <|.. SalidaConsola
-    ICalculadora <|.. Calculadora
-
-    ```mermaid
+   ```mermaid
 sequenceDiagram
     participant Usuario
     participant Main
@@ -107,4 +99,3 @@ sequenceDiagram
     GestorOperaciones-->>Controlador: resultado
     Controlador->>SalidaConsola: mostrarResultado(resultado)
 ```
-
